@@ -1,1 +1,1 @@
-"# TRAOpenDataDiagramer" 
+# TRAOpenDataDiagramer
