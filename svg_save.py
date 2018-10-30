@@ -245,7 +245,19 @@ class Draw :
                         del( y )
 
         def _draw_line( self, trainId, path, className, lineId, textAnchor, expertList ) :
-            if path != 'M' :
+            if path != '' :
+                firstStart = path.find( 'L' )
+                secondStart = path[firstStart + 1:].find( 'L' )
+                if secondStart < 0 : # only one line segment
+                    firstComma = path[1:].find( ',' ) + 1
+                    secondComma = path[firstStart + 1:].find( ',' ) + 1
+                    horizon = True
+                    for i in range( firstStart - firstComma ) :
+                        if path[firstComma + i] != path[secondComma + i] : # not single horizontal line
+                            horizon = False
+                            break
+                    if horizon :
+                        return
                 if len( expertList ) > 0 and trainId in expertList :
                     self.drawHandler._path( path, lineId, _class = className, _emphasis = True )
                 else :
