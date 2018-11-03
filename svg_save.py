@@ -78,10 +78,7 @@ class Draw :
                     self.fileHandler.write( '<line x1="' + x1 + '" x2="' + x2 + '" y1="' + y1 + '" y2="' + y2 + '" />' )
 
             def _path( self, pathList, lineId, _color = None, _class = None, _emphasis = False ) :
-                if _emphasis :
-                    emphasisStr = '" style="stroke-width: 4" />'
-                else :
-                    emphasisStr = '" />'
+                emphasisStr = '" style="stroke-width: 4" />' if _emphasis else '" />'
                 if _class is not None :
                     self.fileHandler.write( '<path class="' + _class + '" d="' + pathList + '" id="' + lineId + emphasisStr )
                 elif _color is not None :
@@ -126,12 +123,9 @@ class Draw :
                                 self.drawHandler._text( f'{x:.2f}', f'{49 + k * 300:.2f}', '30', _color = '#999966' )
             for item in self.listStaTable :
                 y = float( item[2] ) + 50
-                if item[3] == 'NA' :
-                    self.drawHandler._line( '50', f'{y:.2f}', '14450', f'{y:.2f}', _class = 'station_na_line' )
-                else :
-                    self.drawHandler._line( '50', f'{y:.2f}', '14450', f'{y:.2f}', _class = 'station_line' )
+                self.drawHandler._line( '50', f'{y:.2f}', '14450', f'{y:.2f}', _class = 'station_na_line' if item[3] == 'NA' else 'station_line' )
                 for i in range( 25 ) :
-                    self.drawHandler._text( f'{5 + i * 600:.2f}', f'{y - 5:.2f}', item[1], _color = '#999966' )
+                    self.drawHandler._text( f'{5 + i * 600:.2f}', f'{y - 5:.2f}', item[1], _color = '#bfbfbf' if item[3] == 'NA' else '#999966' )
 
         def _draw_trains( self, dfTrainTime, trainId, carClass, line, expertList ) :
             className = dictCarClass.get( carClass, 'ordinary' )
@@ -246,17 +240,11 @@ class Draw :
 
         def _draw_line( self, trainId, path, className, lineId, textAnchor, expertList ) :
             if path != '' :
-                firstStart = path.find( 'L' )
-                secondStart = path[firstStart + 1:].find( 'L' )
-                if secondStart < 0 : # only one line segment
-                    firstComma = path[1:].find( ',' ) + 1
-                    secondComma = path[firstStart + 1:].find( ',' ) + 1
-                    horizon = True
-                    for i in range( firstStart - firstComma ) :
-                        if path[firstComma + i] != path[secondComma + i] : # not single horizontal line
-                            horizon = False
-                            break
-                    if horizon :
+                if path.count( 'L' ) < 2 :
+                    startL = path.find( 'L' )
+                    firstY = path.find( ',', 1 ) + 1
+                    secondY = path.find( ',', startL + 1 ) + 1
+                    if path[firstY:startL] == path[secondY:] :
                         return
                 if len( expertList ) > 0 and trainId in expertList :
                     self.drawHandler._path( path, lineId, _class = className, _emphasis = True )

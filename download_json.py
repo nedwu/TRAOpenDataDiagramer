@@ -23,8 +23,6 @@ def read_url( url ) :
     return jsonURL
 
 def download_tra_json( jsonURL, outputFolder = './' ) :
-    if str( jsonURL ).split( '/' )[-1].split( '.' )[-1].split( '\'' )[0].lower() != 'zip' :
-        return
     if outputFolder[-1] != '/' :
         outputFolder = outputFolder + '/'
     try :
@@ -80,7 +78,8 @@ if printAll :
         print( item )
 if selectAll or ( len( dateList ) == 0 ) :
     for item in items :
-        download_tra_json( item, outputFolder = outputFolder + '/' )
+        if str( item[1] ).endswith( 'zip' ) :
+            download_tra_json( item, outputFolder = outputFolder + '/' )
 else :
     midList = []
     handleList = []
@@ -109,4 +108,5 @@ else :
                 existItem = items[0]
     if len( handleList ) > 0 :
         for item in handleList :
-            download_tra_json( item, outputFolder = outputFolder + '/' )
+            if str( item[1] ).endswith( 'zip' ) :
+                download_tra_json( item, outputFolder = outputFolder + '/' )
