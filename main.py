@@ -60,7 +60,7 @@ def main( jsonLocation, webSvgLocation, expertList, deleteAtExit ) :
         jsonFiles.sort()
         for filename in jsonFiles :            
             t1 = time.time()
-            if filename.split( '.' )[1] == 'json' :
+            if filename.endswith( '.json' ) :
                 nextFilename = _make_next_date_filename( filename )
                 print( '資料檔日期：' + filename.split( '.' )[0] )
                 count = 0
