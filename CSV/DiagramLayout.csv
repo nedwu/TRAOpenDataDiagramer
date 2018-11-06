@@ -1,11 +1,10 @@
 ﻿# catagory ID,subfolder,prefix,start station ID,pass station ID,end station ID,direction,describe
-LINE_WN,縱貫線北段,LINE_WN_,1001,1008,1028,CCW,西部幹線北段（基隆-竹南）
+LINE_WN,縱貫線北段,LINE_WN_,1001,1024,1305,CCW,西部幹線北段（基隆-苗栗）
 LINE_WM,山線,LINE_WM_,1028,1317,1120,CCW,西部幹線台中線（竹南-彰化，經苗栗）
 LINE_WC,海線,LINE_WC_,1028,1112,1120,CCW,西部幹線海岸線（竹南-彰化，經大甲）
-LINE_WS,縱貫線南段,LINE_WS_,1120,1215,1238,CCW,西部幹線南段（彰化-高雄）
-LINE_PT,屏東線,LINE_PT_,1242,1406,1418,CCW,屏東線（新左營-枋寮）
-LINE_SL,南迴線,LINE_SL_,1418,1508,1632,CCW,南迴線（枋寮-台東）
-LINE_TT,臺東線,LINE_TT_,1715,1619,1632,CW,台東線（花蓮-台東）
+LINE_WS,縱貫線南段,LINE_WS_,1120,1238,1411,CCW,西部幹線南段（彰化-潮州）
+LINE_SL,屏東南迴線,LINE_SL_,1242,1418,1632,CCW,屏東南迴線（新左營-臺東）
+LINE_TT,臺東線,LINE_TT_,1715,1619,1632,CW,台東線（花蓮-臺東）
 LINE_NL,北迴線,LINE_NL_,1826,1709,1715,CW,北迴線（蘇澳新-花蓮）
 LINE_IL,宜蘭線,LINE_IL_,1003,1820,1827,CW,宜蘭線（七堵-蘇澳）
 BRANCH_PS,深澳平溪線,BRANCH_PS_,2003,1904,1908,CW,平溪深澳線（八斗子-菁桐）
