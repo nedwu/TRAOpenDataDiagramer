@@ -9,7 +9,10 @@ import time
 import dataprocess as dp
 import svg_save
 
-version = '0.1Alpha'
+major = '0'
+minor = '1'
+suffix = 'Beta'
+version = major + '.' + minor + suffix
 folders, dictDrawProfile = dp.diagramLayout()
 
 def _make_next_date_filename( filename ) :
@@ -82,7 +85,7 @@ def main( jsonLocation, webSvgLocation, expertList, deleteAtExit ) :
                 nextCount = total // 1000
                 lastProcess = 0
                 for trainInfo in trains :
-                    trainId = trainInfo['Train']
+                    trainId = trainInfo[0] # train
                     count += 1
                     # update processing bar
                     if count >= nextCount :
@@ -94,8 +97,8 @@ def main( jsonLocation, webSvgLocation, expertList, deleteAtExit ) :
                     sys.stdout.write( f'[{bar:s}] {( float( percents ) / 10 ):5.1f}% ...{trainId:>5s}次 處理中\r' )
                     sys.stdout.flush()
                     # find all train's passing station and time
-                    trainRunTime = dp.get_all_time_for_train( trainInfo )
-                    svgHandler.draw_trains( trainRunTime, trainId, trainInfo['CarClass'], trainInfo['Line'], expertList )
+                    trainRunTime = dp.get_all_time_for_train( trainInfo ) # using interpolation
+                    svgHandler.draw_trains( trainRunTime, trainId, trainInfo[1], trainInfo[2], expertList ) # carclass, line 
                 svgHandler.save()
                 print( f'\n資料檔處理完成！共處理 {total:d} 筆資料，有效資料有 {count:d} 筆' )
                 t2 = time.time()

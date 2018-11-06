@@ -110,7 +110,7 @@ class Draw :
             for i in range( 25 ) :
                 x = 50 + i * 600
                 self.drawHandler._line( f'{x:.2f}', '50', f'{x:.2f}', f'{self.height + 50:.2f}', _class = 'hour_line' )
-                for j in range( 11 ) :
+                for j in range( int( self.height + 299 ) // 300 ) :
                     self.drawHandler._text( f'{x:.2f}', f'{49 + j * 300:.2f}', f'{i:>02d}' + '00', _color = '#999966' )
                 if i != 24 :
                     for j in range( 5 ) :
@@ -119,7 +119,7 @@ class Draw :
                             self.drawHandler._line( f'{x:.2f}', '50', f'{x:.2f}', f'{self.height + 50:.2f}', _class = 'min10_line' )
                         else :
                             self.drawHandler._line( f'{x:.2f}', '50', f'{x:.2f}', f'{self.height + 50:.2f}', _class = 'min30_line' )
-                            for k in range( 0, 11 ) :
+                            for k in range( int( self.height + 299 ) // 300 ) :
                                 self.drawHandler._text( f'{x:.2f}', f'{49 + k * 300:.2f}', '30', _color = '#999966' )
             for item in self.listStaTable :
                 y = float( item[2] ) + 50
